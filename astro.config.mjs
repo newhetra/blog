@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://blog-epe.pages.dev',
+  site: 'https://xiaoluos-wife.pages.dev',
   integrations: [sitemap()],
 });
