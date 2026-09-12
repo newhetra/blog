@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, SECTIONS } from '../consts';
+import { getCollection } from 'astro:content';
+import type { CollectionKey } from 'astro';
+
+// 首页同时展示三个栏目的最新内容
+const sectionPreviews = await Promise.all(
+  SECTIONS.map(async (section) => {
+    const entries = await getCollection(section.key as CollectionKey);
+    const latest = entries
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+      .slice(0, 3);
+    return { ...section, latest };
+  })
+);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <h1>{SITE_TITLE}</h1>
+    <p class="page-desc">{SITE_DESCRIPTION}</p>
+  </section>
+
+  <section class="sections-grid">
+    {
+      sectionPreviews.map((section) => (
+        <div class="section-card">
+          <div class="section-head">
+            <h2>
+              <a href={section.path}>{section.label}</a>
+            </h2>
+            <span class="section-desc">{section.description}</span>
+          </div>
+          {section.latest.length === 0 && (
+            <p class="empty-hint">还没有内容，快去 src/content/{section.key}/ 添加第一篇吧。</p>
+          )}
+          <ul class="latest-list">
+            {section.latest.map((entry) => (
+              <li>
+                <a href={`/${section.key}/${entry.id}/`}>{entry.data.title}</a>
+                <span class="date">
+                  <FormattedDate date={entry.data.pubDate} />
+                </span>
+              </li>
+            ))}
+          </ul>
+          <a class="more" href={section.path}>查看全部 →</a>
+        </div>
+      ))
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    margin-bottom: 2.5rem;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.25rem;
+  }
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.25rem;
+  }
+  .section-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .section-head h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    display: inline;
+  }
+  .section-head h2 a:hover {
+    color: var(--accent);
+  }
+  .section-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+  .latest-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .latest-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+  }
+  .latest-list a {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .latest-list a:hover {
+    color: var(--accent);
+  }
+  .latest-list .date {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .empty-hint {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .more {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import { SITE_TITLE, SECTIONS } from '../consts';
+
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { label: '首页', path: '/' },
+  ...SECTIONS.map((s) => ({ label: s.label, path: s.path })),
+];
+
+const isActive = (path: string) =>
+  path === '/' ? currentPath === '/' : currentPath.startsWith(path);
+---
+
+<header>
+  <nav>
+    <a class="site-title" href="/">{SITE_TITLE}</a>
+    <ul>
+      {
+        navItems.map((item) => (
+          <li>
+            <a href={item.path} class:list={{ active: isActive(item.path) }}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .site-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+  ul {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul a {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    color: var(--text-muted);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  ul a:hover {
+    color: var(--text);
+    background: var(--bg-hover);
+  }
+  ul a.active {
+    color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 500;
+  }
+</style>

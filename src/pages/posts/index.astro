@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
+import { SECTIONS } from '../../consts';
+
+const section = SECTIONS.find((s) => s.key === 'posts')!;
+const entries = (await getCollection('posts')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title={section.label} description={section.description}>
+  <a class="back-link" href="/">← 返回首页</a>
+  <h1>{section.label}</h1>
+  <p class="page-desc">{section.description}</p>
+
+  <ul class="entry-list">
+    {
+      entries.map((entry) => (
+        <li class="entry-item">
+          <h2>
+            <a href={`/posts/${entry.id}/`}>{entry.data.title}</a>
+          </h2>
+          <p class="entry-meta">
+            <FormattedDate date={entry.data.pubDate} />
+            {entry.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </p>
+          {entry.data.description && <p class="entry-desc">{entry.data.description}</p>}
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

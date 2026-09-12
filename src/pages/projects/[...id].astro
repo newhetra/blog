@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <a class="back-link" href="/projects/">← 返回项目列表</a>
+  <h1>{entry.data.title}</h1>
+  <p class="entry-meta">
+    <FormattedDate date={entry.data.pubDate} />
+    {entry.data.tech.map((t) => (
+      <span class="tag">{t}</span>
+    ))}
+    {entry.data.url && <a href={entry.data.url} target="_blank" rel="noopener">访问链接 ↗</a>}
+  </p>
+  <div class="prose">
+    <Content />
+  </div>
+</BaseLayout>
