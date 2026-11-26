@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xiaoluos-wife.pages.dev/sitemap-index.xml

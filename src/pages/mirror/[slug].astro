@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getCollection('mirror');
+  return items.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={`${entry.data.title} · 镜像存档`} canonical={entry.data.original}>
+  <a class="back-link" href="/mirror/">← 返回全部文章</a>
+  <h1>{entry.data.title}</h1>
+  <p class="entry-meta">{entry.data.date} · 原文首发：<a href={entry.data.original}>{entry.data.original}</a></p>
+  <Content />
+  <p style="margin-top:2rem"><a class="back-link" href="/resources/">资源库 →</a></p>
+</BaseLayout>

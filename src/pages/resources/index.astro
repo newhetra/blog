@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('resources')).sort((a, b) => a.data.code.localeCompare(b.data.code));
+---
+<BaseLayout title="资源库" description="整理好的开源工具与资料包，点击进入详情获取。">
+  <a class="back-link" href="/">← 首页</a>
+  <h1>资源库</h1>
+  <p>整理好的开源工具与资料包，点击进入详情获取。</p>
+  {items.map((entry) => (
+    <a class="card-link" href={`/resources/${entry.data.code}/`}>
+      <div><strong>{entry.data.title}</strong></div>
+      <div class="hint">{entry.data.code} · {entry.data.category} · {entry.data.license}</div>
+      <p class="hint">{entry.data.summary}</p>
+    </a>
+  ))}
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getCollection('resources');
+  return items.map((entry) => ({ params: { code: entry.data.code }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} · 资源详情`} description={entry.data.summary}>
+  <a class="back-link" href="/resources/">← 返回资源库</a>
+  <h1>{entry.data.title}</h1>
+  <p class="entry-meta">{entry.data.code} · {entry.data.category} · {entry.data.license}</p>
+  <p>{entry.data.summary}</p>
+  <Content />
+  <p>来源：<a href={`https://github.com/${entry.data.repo}`}>{entry.data.repo}</a></p>
+  <p style="margin-top:2rem"><a class="back-link" href="/mirror/">全部文章 →</a></p>
+</BaseLayout>

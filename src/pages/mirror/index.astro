@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('mirror')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+<BaseLayout title="全部文章" description="所有平台、所有账号发布过的内容，这里都有。">
+  <a class="back-link" href="/">← 首页</a>
+  <h1>全部文章</h1>
+  <p>所有平台、所有账号发布过的内容，这里都有。</p>
+  {items.map((entry) => (
+    <a class="card-link" href={`/mirror/${entry.id}/`}>
+      <div><strong>{entry.data.title}</strong></div>
+      <div class="hint">{entry.data.date} · 首发于 {entry.data.original}</div>
+    </a>
+  ))}
+</BaseLayout>
