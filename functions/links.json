@@ -17,13 +17,13 @@
   "title": "fast-anything 局部 Rust 加速器",
   "summary": "Plugin: the repo is an agent plugin marketplace ([`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json)) that bundles the skill and the MCP serv",
   "quark": {
-   "share": "https://pan.quark.cn/s/f0b4366b1726",
-   "passcode": "",
+   "share": "https://pan.quark.cn/s/d40034ba5f80?pwd=Zh3f",
+   "passcode": "Zh3f",
    "promo": ""
   },
   "baidu": {
-   "share": "https://pan.baidu.com/s/1nBzt8Jdas5-GmA8pPY0J8A?pwd=4z6u",
-   "passcode": "4z6u",
+   "share": "https://pan.baidu.com/s/12Ygx7uCtt5NJvT7wJDLYAw?pwd=xfxa",
+   "passcode": "xfxa",
    "promo": ""
   }
  },
@@ -66,6 +66,34 @@
   "baidu": {
    "share": "https://pan.baidu.com/s/1A3shVBhjqes3l9iCrZQCmA?pwd=nwf7",
    "passcode": "nwf7",
+   "promo": ""
+  }
+ },
+ "SW-006": {
+  "title": "yt-dlp 下载器",
+  "summary": "yt-dlp is a feature-rich command-line audio/video downloader with support for [thousands of sites](supportedsites.md). The project is a fork of [youtube-dl](htt",
+  "quark": {
+   "share": "https://pan.quark.cn/s/156c0e3add94?pwd=rEwK",
+   "passcode": "rEwK",
+   "promo": ""
+  },
+  "baidu": {
+   "share": "https://pan.baidu.com/s/1QDNrm6LUDR4a-vR5c7mCmQ?pwd=qihf",
+   "passcode": "qihf",
+   "promo": ""
+  }
+ },
+ "SW-007": {
+  "title": "Flameshot 截图标注",
+  "summary": "2. Add a new entry. `Print` is the key name, `flameshot gui` is the shell command; for more options see [the fluxbox wiki](https://sillyslux.github.io/fluxbox-w",
+  "quark": {
+   "share": "https://pan.quark.cn/s/4af38da0f46e?pwd=2vPH",
+   "passcode": "2vPH",
+   "promo": ""
+  },
+  "baidu": {
+   "share": "https://pan.baidu.com/s/10cLFiABJWqnZEYMar6hFug?pwd=ci33",
+   "passcode": "ci33",
    "promo": ""
   }
  }
