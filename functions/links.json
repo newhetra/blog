@@ -45,7 +45,7 @@
   "title": "LocalSend 局域网互传",
   "summary": "LocalSend is a cross-platform app that enables secure communication between devices using a REST API and HTTPS encryption. Unlike other messaging apps that rely",
   "quark": {
-   "share": "",
+   "share": "https://pan.quark.cn/s/fa2c9526fb45",
    "passcode": "",
    "promo": ""
   },
@@ -59,13 +59,13 @@
   "title": "Ventoy U盘装机",
   "summary": "Ventoy is an open source tool to create bootable USB drive for ISO/WIM/IMG/VHD(x)/EFI files.",
   "quark": {
-   "share": "",
+   "share": "https://pan.quark.cn/s/986fa872c765",
    "passcode": "",
    "promo": ""
   },
   "baidu": {
-   "share": "",
-   "passcode": "",
+   "share": "https://pan.baidu.com/s/1A3shVBhjqes3l9iCrZQCmA?pwd=nwf7",
+   "passcode": "nwf7",
    "promo": ""
   }
  }
